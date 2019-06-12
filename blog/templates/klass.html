@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <h1>{{name}}</h1>
+       {{htm1|safe}}
+       <style>
+           table td {
+               width: 135px;
+           }
+       </style>
+{% endblock %}

@@ -1,14 +1,18 @@
 {% load bootstrap4 %}
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>XXXXXX</title>
+    <title>逢甲教授請益時間預約系統</title>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
 <body>
 
-    <h1><a href="/">XXXXXXXXXX</a></h1>
+    <div class="page-header">
+            <h1><a href="">逢甲教授請益時間預約系統</a></h1>
+    </div>
 
 
     {% bootstrap_messages %}

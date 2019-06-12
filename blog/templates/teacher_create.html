@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+{% load static  %}
+{% block content %}
+        <div class="content container">
+            <form method="POST">
+                {% csrf_token %} 
+                <div class="post-form">
+                    資訊系老師名稱：<input type="text" name="name" class="form-control"><br/>
+                </div>
+                <input type="submit" class="btn btn-primary save">
+            </form>
+        </div>
+
+{% endblock %}

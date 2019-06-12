@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', 
+    #'blog.apps.BlogConfig',    
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +55,14 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'myblog.urls'
 
 TEMPLATES = [
+     {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'environment': 'myblog.jinja2.environment'
+        },
+    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
@@ -104,9 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hant'
+TIME_ZONE = 'Asia/Taipei'
 
-TIME_ZONE = 'UTC'
+
 
 USE_I18N = True
 
@@ -120,12 +131,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/login/'
+#LOGIN_URL = '/login/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-INSTALLED_APPS = [
-    'blog.apps.BlogConfig',    
-    'bootstrap4', # new
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes'
-]
+

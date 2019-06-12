@@ -16,6 +16,7 @@
         {% csrf_token %}
         {% bootstrap_form form %}
         {% bootstrap_button '登入' button_type='submit' button_class='btn-primary' %}
+        <a class="btn btn-link"href="/sign-up">註冊</a>
     </form>
     <p><a href="{% url 'password_reset' %}">忘記密碼?</a></p>
 {% endblock %}
