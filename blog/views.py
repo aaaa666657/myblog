@@ -35,20 +35,24 @@ def addteacher(request):
         if request.user.is_superuser:    
             if request.method == "POST":
                 new_title   = request.POST.get('name')
-                new_teacher = Teacher(name=new_title)
-                url = "https://www.iecs.fcu.edu.tw/teacher/"+urllib.parse.quote(new_title)+"/class/"
-                try:
-                    dfs = pd.read_html(url)  ## 回傳DataFrame類別的陣列
-                    df = dfs[1]
-                    df  = [ row[1:] for row in df.values.tolist()]
-                    new_teacher.save()
-                    for i in range(14):
-                        for j in range(7):
-                            if df[i][j] != '-':
-                                ClassTable(name=df[i][j],weekday=j,period=i,teacher=new_teacher).save()
-                except:
-                    messages.add_message(request, messages.WARNING, '資訊系無此教授')
-                return redirect('teacher_list')
+                if not Teacher.objects.filter(name=new_title):
+                    new_teacher = Teacher(name=new_title)
+                    url = "https://www.iecs.fcu.edu.tw/teacher/"+urllib.parse.quote(new_title)+"/class/"
+                    try:
+                        dfs = pd.read_html(url)  ## 回傳DataFrame類別的陣列
+                        df = dfs[1]
+                        df  = [ row[1:] for row in df.values.tolist()]
+                        new_teacher.save()
+                        for i in range(14):
+                            for j in range(7):
+                                if df[i][j] != '-':
+                                    ClassTable(name=df[i][j],weekday=j,period=i,teacher=new_teacher).save()
+                    except:
+                        messages.add_message(request, messages.WARNING, '資訊系無此教授')
+                    return redirect('teacher_list')
+                else:
+                    messages.add_message(request, messages.WARNING, '已有此老師')
+                    return redirect('teacher_list')
             return render(request, 'teacher_create.html', {})
         else:
             messages.add_message(request, messages.WARNING, '您無此權限')
